@@ -1,0 +1,14 @@
+export const MENU = 1        //显示菜单
+export const CONTENT = 2     //查看页面
+export const ADD = 3         //新增
+export const UPDATE = 4      //修改
+export const DELETE = 5      //删除
+export const DETAIL = 6      //详情
+export const CHECK = 7       //审核
+export const UPLOAD = 8      //上传
+export const SHELT = 9       //上架
+export const SHELTOFF = 10   //下架
+export const TOP = 11        //置顶
+export const CHANGESCORE = 12 //积分变更
+export const FORBID =13      //禁用
+export const RECOVER =14     //启用

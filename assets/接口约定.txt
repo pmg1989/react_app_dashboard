@@ -1,0 +1,252 @@
+接口请求返回约定：
+  request:
+     /api/list?current=1&pageSize=10&field=name&keyword=胡彦斌
+
+     //参数说明：
+     {
+       url： /api/list,
+       method: get,
+       params: {
+         current: 1,         //当前页码，第一页从1开始(可选,默认current=1,首次请求可不省略不传)
+         pageSize: 10,       //每页显示条目数(可选,默认pageSize=10,首次请求可不省略不传)
+         field: name,        //搜索字段(可选)
+         keyword: 胡彦斌,    //搜索关键字(可选)
+       }
+     }
+
+  response:
+    //参数说明：
+    {
+      success: true,         //返回状态 true: 成功, false: 失败
+      msg: '',               //返回错误信息或成功操作信息
+      data: {                //统一接收 data 作为返回数据源
+        list: [{...},{...}], //过滤后的列表数据
+        page:{               //若需分页显示，则必返回如下三个对象，如不需分页显示，则无需返回此项
+          current: 1,        //当前页码，第一页从1开始
+          pageSize: 10,      //每页显示条目数
+          total: 100         //返回过滤后数据的总条数
+        }
+      }
+    }
+
+登录接口：
+  request:
+      /admin/check
+      //参数说明
+      {
+        url：/admin/check,
+        method: post,
+        data: {
+          access_token: 'xxx',
+          mobile: '',
+          password: ''
+        }
+      }
+
+  response:
+    //参数说明：
+    {
+      success: true,         //返回状态 true: 成功, false: 失败
+      msg: '',               //返回错误信息或成功操作信息
+      data: {                //统一接收 data 作为返回数据源
+        adminName: '胡彦斌',
+        roleName: '超级管理员'
+        countryCode: '88',
+        power: '{
+          1: [1],
+          2: [1],
+          4: [1, 2, 3, 4, 5],
+          6: [1],
+          7: [1, 4]
+        }'
+      }
+    }
+
+  power 存储方式：字符串，可转化为json格式数据
+    {
+      4:        //键：左侧栏子菜单ID
+      [         //值：左侧栏子菜单ID下可操作的权限，以数组方式存取
+        1,      //[MENU]:   查看菜单权限,
+        2,      //[DETAIL]: 查看详情权限,
+        3,      //[ADD]:    新增权限,
+        4,      //[UPDATE]: 修改权限,
+        5,      //[DELETE]: 删除权限,
+        6,      //[CHECK]:  审核权限,
+        7,      //[UPLOAD]: 上传权限,
+        ...     //[...]:    可自由拓展
+      ]
+    }
+
+获取角色列表接口：
+  request:
+    //参数说明：
+    {
+      url： /api/role,
+      method: get,
+      params: {
+      }
+    }
+
+  response:
+    //参数说明：
+    {
+      success: true,         //返回状态 true: 成功, false: 失败
+      msg: '',               //返回错误信息或成功操作信息
+      data: {                //统一接收 data 作为返回数据源
+        list: [{...},{...}], //列表数据, *包含角色权限信息*
+        page:{               //若需分页显示，则必返回如下三个对象，如不需分页显示，则无需返回此项
+          current: 1,        //当前页码，第一页从1开始
+          pageSize: 10,      //每页显示条目数
+          total: 100         //返回过滤后数据的总条数
+        }
+      }
+    }
+
+修改角色接口：
+  request:
+    //参数说明：
+    {
+      url： /api/roleEdit,
+      method: post,
+      data: {
+        id: roleId,
+        name: '超级管理员',
+        power: '{
+          1: [1],
+          2: [1],
+          4: [1, 2, 3, 4, 5],
+          4: [1],
+          6: [1],
+          7: [1, 4]
+        }'
+      }
+    }
+
+  response:
+    //参数说明：
+    {
+      success: true,         //返回状态 true: 成功, false: 失败
+      msg: '',               //返回错误信息或成功操作信息
+      data: {                //统一接收 data 作为返回数据源
+      }
+    }
+
+ 伴奏接口：
+  查询：
+    request:
+      {
+      url: /dashboard-accompany/query,
+      method: get,
+
+      }
+    response:
+       {
+         success:true,      //返回状态 true:成功 false: 失败
+         msg:'',            //返回错误信息或成功操作信息
+          data:{
+             list:{
+                                    id:"歌曲编号",
+                                    cover:{
+
+                                    },
+                                    title:"歌名",
+                                    status:2  (2:上架 1：下架 0：草稿)
+                                    upload_date_start：
+                                    upload_date_end:
+                                    file:{
+
+                                    }  (音频文件)
+                                    actor:  (原唱信息)
+                                    time:  (歌曲时长)
+                                    skill： (演唱技巧文案)
+               },
+             page:{               //若需分页显示，则必返回如下三个对象，如不需分页显示，则无需返回此项
+                         current: 1,        //当前页码，第一页从1开始
+                         pageSize: 10,      //每页显示条目数
+                         total: 100         //返回过滤后数据的总条数
+                   }
+
+
+           }
+       }
+    保存：
+       request:
+        {
+         url:/dashboard-accompany/save,
+         method:post,
+         data:
+          {
+             cover:"歌曲封面ID",
+             file:  (音频文件)ID,
+             title:"歌名",
+             actor:  (原唱信息),
+             time:  (歌曲时长),
+             skill： (演唱技巧文案)
+          }
+        }
+        response:
+           {
+                 success: true,         //返回状态 true: 成功, false: 失败
+                 msg: '',               //返回错误信息或成功操作信息
+                 data: {                //统一接收 data 作为返回数据源
+                 }
+           }
+    更新：
+       request:
+              {
+               url:/dashboard-accompany/update,
+               method:post,
+               data:
+                {
+                   id:"歌曲编号",
+                   cover:"歌曲封面ID",
+                   file:  (音频文件)ID,
+                   title:"歌名",
+                   actor:  (原唱信息),
+                   time:  (歌曲时长),
+                   skill： (演唱技巧文案)
+                }
+              }
+       response:
+                {
+                       success: true,         //返回状态 true: 成功, false: 失败
+                       msg: '',               //返回错误信息或成功操作信息
+                       data: {                //统一接收 data 作为返回数据源
+                       }
+                }
+
+大赛榜单管理接口：
+      request:
+             {
+              url:/dashboard-contest/query,
+              method:get,
+
+             }
+       response:
+             {
+               success:true,      //返回状态 true:成功 false: 失败
+               msg:'',            //返回错误信息或成功操作信息
+                data:{
+                   list:{
+                                          contest_id:"大赛名称",
+                                          contest_status: (预告阶段,进行中,已结束)，
+                                          hot:热门
+                                          cover:{}(作品封面)，
+
+                                          title:"作品名称(歌名)",
+                                          username:"用户名",
+                                          tel:"手机号",
+                                          create_date:  (上传时间),
+
+                                          status:2  (2:上架 1：下架 )
+
+                     },
+                   page:{               //若需分页显示，则必返回如下三个对象，如不需分页显示，则无需返回此项
+                               current: 1,        //当前页码，第一页从1开始
+                               pageSize: 10,      //每页显示条目数
+                               total: 100         //返回过滤后数据的总条数
+                         }
+
+
+                 }
+             }

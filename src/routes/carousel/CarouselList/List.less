@@ -1,0 +1,28 @@
+
+:global {
+  .ant-carousel {
+    .slick-slide {
+      position: relative;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .carousel-opt-box {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        opacity: 0;
+        transition: all .3s ease;
+      }
+
+      &:hover {
+        .carousel-opt-box {
+          top: 20px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
