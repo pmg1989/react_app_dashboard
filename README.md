@@ -1,4 +1,4 @@
-# Newband dashbordAdmin
+# react_app_dashboard
 
 [![React Native](https://img.shields.io/badge/react-^15.4.1-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
 [![Ant Design](https://img.shields.io/badge/ant--design-^2.7.0-yellowgreen.svg?style=flat-square)](https://github.com/ant-design/ant-design)
@@ -42,7 +42,7 @@
 克隆项目文件:
 
 ```
-git clone git@git.coding.net:newband-dev/app_dashboard.git
+git clone git@github.com:pmg1989/react_app_dashboard.git
 ```
 
 进入目录安装依赖:
